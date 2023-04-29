@@ -6,6 +6,7 @@ import styles from '@/styles/Home.module.css'
 import Draft from '@/components/Draft/Draft'
 import Post from '@/components/Post/Post'
 import UserModal from '@/components/UserModal/UserModal'
+import Navbar from '@/components/Navbar/Navbar'
 
 interface User {
   name: string | null
@@ -71,6 +72,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <Navbar openUserModal={() => setUserModalOpen(true)} />
         <Draft content={content} setContent={setContent} sendPost={sendPost} />
         {timeline?.map((post: any) => (
           <Post key={post.id} post={post} />
