@@ -1,0 +1,44 @@
+.post {
+    width: 800px;
+    padding: 1rem;
+    background-color: #3f3f3f;
+    border-radius: 0.5rem;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    font-size: 1.1rem;
+}
+
+.content {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
