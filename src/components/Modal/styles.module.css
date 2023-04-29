@@ -1,0 +1,37 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    padding: 1rem;
+    background-color: #3f3f3f;
+    border-radius: 0.5rem;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modalBody {
+    margin-top: 1rem;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
