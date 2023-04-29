@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
@@ -5,16 +7,32 @@ import Draft from '@/components/Draft/Draft'
 import Post from '@/components/Post/Post'
 import UserModal from '@/components/UserModal/UserModal'
 
+interface User {
+  name: string | null
+  handle: string | null
+  color: string | null
+}
+
 export default function Home() {
   const [timeline, setTimeline] = useState<any[]>([])
   const [content, setContent] = useState('')
   const [userModalOpen, setUserModalOpen] = useState(false)
+  const [user, setUser] = useState({} as User)
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}')
+    setUser(user)
+  }, [])
 
   function closeModal() {
     setUserModalOpen(false)
   }
 
   function sendPost() {
+    if (!user?.handle) {
+      setUserModalOpen(true)
+      return
+    }
     if (content.length > 0) {
       fetch('/api/sendPost', {
         method: 'POST',
@@ -23,9 +41,9 @@ export default function Home() {
         },
         body: JSON.stringify({
           content,
-          authorName: 'Hanibal Buress',
-          authorHandle: 'hanibal',
-          authorColor: '#00bcd4'
+          authorName: user.name,
+          authorHandle: user.handle,
+          authorColor: user.color
         })
       })
         .then(res => res.json())
@@ -35,9 +53,7 @@ export default function Home() {
             setTimeline([data.post, ...timeline])
           }
         })
-        return
     }
-    setUserModalOpen(true)
   }
 
   useEffect(() => {
