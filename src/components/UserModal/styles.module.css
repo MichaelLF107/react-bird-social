@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.colorPicker {
+    margin-top: 1rem;
+}
+
+.colorLabel {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.error {
+    color: #ff0000;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    height: 1rem;
+}
+
+.avatar {
+    margin-bottom: 1rem;
+}
+
+.footer {
+    display: flex;
+    gap: 1rem;
+}
