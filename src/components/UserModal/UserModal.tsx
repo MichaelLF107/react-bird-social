@@ -6,12 +6,20 @@ import { ChromePicker } from 'react-color'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import { getTextColor, getInitials } from '@/lib/utils'
 
+interface User {
+    name: string | null
+    handle: string | null
+    color: string | null
+}
+
 interface UserModalProps {
     isOpen: boolean
     onClose: () => void
+    user: User
+    setUser: (user: User) => void
 }
 
-export default function UserModal({ isOpen, onClose }: UserModalProps) {
+export default function UserModal({ isOpen, onClose, user, setUser }: UserModalProps) {
     const [name, setName] = useState('')
     const [handle, setHandle] = useState('')
     const [color, setColor] = useState('#ffffff')
@@ -57,6 +65,7 @@ export default function UserModal({ isOpen, onClose }: UserModalProps) {
             color
         }
         localStorage.setItem('user', JSON.stringify(user))
+        setUser(user)
         onClose()
     }
 

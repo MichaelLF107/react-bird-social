@@ -21,8 +21,8 @@ export default function Home() {
   const [user, setUser] = useState({} as User)
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user') || '{}')
-    setUser(user)
+      const user = JSON.parse(localStorage.getItem('user') || '{}')
+      setUser(user)
   }, [])
 
   function closeModal() {
@@ -72,13 +72,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Navbar openUserModal={() => setUserModalOpen(true)} />
+        <Navbar openUserModal={() => setUserModalOpen(true)} user={user} setUser={setUser} />
         <Draft content={content} setContent={setContent} sendPost={sendPost} />
         {timeline?.map((post: any) => (
           <Post key={post.id} post={post} />
         ))}
       </main>
-      <UserModal isOpen={userModalOpen} onClose={closeModal} />
+      <UserModal isOpen={userModalOpen} onClose={closeModal} user={user} setUser={setUser} />
     </>
   )
 }

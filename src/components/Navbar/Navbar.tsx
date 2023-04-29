@@ -12,10 +12,11 @@ interface User {
 
 interface NavbarProps {
     openUserModal: () => void
+    user: User
+    setUser: (user: User) => void
 }
 
-export default function Navbar({ openUserModal }: NavbarProps) {
-    const [user, setUser] = useState({} as User)
+export default function Navbar({ openUserModal, user, setUser }: NavbarProps) {
     const [initials, setInitials] = useState('')
     const [textColor, setTextColor] = useState('')
     const [open, setOpen] = useState(false)
@@ -25,11 +26,10 @@ export default function Navbar({ openUserModal }: NavbarProps) {
             const user = JSON.parse(localStorage.getItem('user') || '{}')
             const initials = getInitials(user.name)
             const textColor = getTextColor(user.color)
-            setUser(user)
             setInitials(initials)
             setTextColor(textColor)
         }
-    }, [localStorage.getItem('user')])
+    }, [user])
 
     function handleLogout() {
         localStorage.removeItem('user')
