@@ -47,6 +47,74 @@ export default function Post({ post }: PostProps) {
 
     const initialsColor = getTextColor(post.authorColor)
 
+    function handleStarPost() {
+        const starredPosts = JSON.parse(localStorage.getItem('starredPosts') || '[]')
+        if (starred) {
+            const index = starredPosts.indexOf(post.id)
+            if (index > -1) {
+                starredPosts.splice(index, 1)
+                fetch('/api/unstarPost', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: post.id
+                    })
+                })
+                post.stars = post.stars - 1
+            }
+        } else {
+            starredPosts.push(post.id)
+            fetch('/api/starPost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: post.id
+                })
+            })
+            post.stars = post.stars + 1
+        }
+        localStorage.setItem('starredPosts', JSON.stringify(starredPosts))
+        setStarred(!starred)
+    }
+
+    function handleSharePost() {
+        const sharedPosts = JSON.parse(localStorage.getItem('sharedPosts') || '[]')
+        if (shared) {
+            const index = sharedPosts.indexOf(post.id)
+            if (index > -1) {
+                sharedPosts.splice(index, 1)
+                fetch('/api/unsharePost', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: post.id
+                    })
+                })
+                post.shares = post.shares - 1
+            }
+        } else {
+            sharedPosts.push(post.id)
+            fetch('/api/sharePost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: post.id
+                })
+            })
+            post.shares = post.shares + 1
+        }
+        localStorage.setItem('sharedPosts', JSON.stringify(sharedPosts))
+        setShared(!shared)
+    }
+
     useEffect(() => {
         const starredPosts = JSON.parse(localStorage.getItem('starredPosts') || '[]')
         const sharedPosts = JSON.parse(localStorage.getItem('sharedPosts') || '[]')
@@ -75,7 +143,7 @@ export default function Post({ post }: PostProps) {
                 {post.content}
             </div>
             <div className={styles.actions}>
-                <span className={styles.stars}>
+                <span className={styles.stars} onClick={handleStarPost}>
                     {starred ? (
                         <StarIcon sx={{ color: '#ffd700' }} />
                     ) : (
@@ -83,7 +151,7 @@ export default function Post({ post }: PostProps) {
                     )}
                     {post.stars}
                 </span>
-                <span className={styles.stars}>
+                <span className={styles.stars} onClick={handleSharePost}>
                     {shared ? (
                         <ReplyIcon sx={{ color: '#00bcd4' }} />
                     ) : (
