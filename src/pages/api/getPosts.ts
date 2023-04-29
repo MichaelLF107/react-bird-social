@@ -6,6 +6,10 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Post[]>
     ) {
-    const posts = await prisma.post.findMany()
+    const posts = await prisma.post.findMany({
+        orderBy: {
+            date: 'desc'
+        }
+    })
     res.status(200).json(posts)
 }

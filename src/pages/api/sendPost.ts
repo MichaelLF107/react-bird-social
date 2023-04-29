@@ -11,7 +11,7 @@ interface PostInput {
 
 interface Data {
     post: Post
-    sucess: boolean
+    success: boolean
 }
 
 export default async function handler(
@@ -30,5 +30,5 @@ export default async function handler(
             date: new Date()
         }
     })
-    res.status(200).json({ post, sucess: true })
+    res.status(200).json({ post, success: true })
 }
